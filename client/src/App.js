@@ -22,10 +22,11 @@ class App extends Component {
             message: this.state.message
         };
 
-        fetch('http://localhost:8000/api/saveForm', {
+        fetch('http://0.0.0.0/api/saveForm', {
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*'
             },
             method: 'POST',
             body: JSON.stringify(data),
