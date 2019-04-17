@@ -15,18 +15,36 @@ class App extends Component {
     }
 
     send = event => {
+        event.preventDefault();
+        const data = {
+            name: this.state.name,
+            email: this.state.email,
+            message: this.state.message
+        };
+
+        fetch('http://localhost:8000/api/saveForm', {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: 'POST',
+            body: JSON.stringify(data),
+        }).then((res) => {
+            console.log("ok")
+        }).catch((err) => {
+            console.error(err)
+        });
 
     };
     handleChange = event => {
         this.setState({
             [event.target.id]: event.target.value
         });
-        console.log("changed");
     };
 
     render() {
         return (
-            <div className="Login">
+            <div className="Form">
                 <h1>Contacter le webmaster</h1>
                 <FormGroup controlId="name" bsSize="large">
                     <FormLabel>Nom</FormLabel>
@@ -46,7 +64,7 @@ class App extends Component {
                     bsSize="large"
                     type="submit"
                 >
-                    Connexion
+                    Envoyer
                 </Button>
             </div>
         )
